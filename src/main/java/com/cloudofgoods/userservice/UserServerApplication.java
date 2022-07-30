@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.sql.DataSource;
+
 @SpringBootApplication
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -16,7 +18,10 @@ public class UserServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserServerApplication.class, args);
     }
-
-
+/*    @Bean
+    public DataSource dataSource() {
+        return DataSourceBuilder.create().url("jdbc:mysql://localhost:3306/cogdb1")
+                .username("root").password("mynewpassword").driverClassName("com.mysql.cj.jdbc.Driver").build();
+    }*/
 }
 
