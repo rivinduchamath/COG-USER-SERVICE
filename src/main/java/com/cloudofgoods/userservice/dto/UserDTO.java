@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -13,8 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UserDTO implements SuperEntity {
-
+public class UserDTO implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private Long id;
 
     private String username;

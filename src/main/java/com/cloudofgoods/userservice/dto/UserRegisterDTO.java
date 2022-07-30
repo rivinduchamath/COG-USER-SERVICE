@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class UserRegisterDTO {
-
+public class UserRegisterDTO implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     @NotNull
     @NotEmpty
     private String username;
