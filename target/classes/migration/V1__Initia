@@ -1,0 +1,102 @@
+
+
+create table user
+(
+    id           bigint        not null
+        primary key,
+    auth_user_id int           null,
+    created_at   datetime(6)   null,
+    first_name   varchar(255)  null,
+    last_name    varchar(1000) null,
+    updated_at   datetime(6)   null
+);
+
+create table Agent
+(
+    id    bigint not null
+        primary key,
+    agent bigint null,
+    constraint FK1q7gi7jvwvm4vqe3qaa5s2hjt
+        foreign key (agent) references Agent (id),
+    constraint FKfmkpdqvf5fnj4iooy8e3t5vgp
+        foreign key (id) references user (id)
+);
+
+create table Customer
+(
+    id       bigint not null
+        primary key,
+    customer bigint null,
+    constraint FK7h9t6yetm8yefsl6u234rcnpa
+        foreign key (id) references user (id),
+    constraint FKftnvp3xoy6cbwv8v2cf536aym
+        foreign key (customer) references Customer (id)
+);
+
+create table Driver
+(
+    id     bigint not null
+        primary key,
+    driver bigint null,
+    constraint FK1c4ov3qr1mggrgwvct1xlfvwf
+        foreign key (driver) references Driver (id),
+    constraint FK4qk6gi17ny8txs59llpm2m3cf
+        foreign key (id) references user (id)
+);
+
+create table affiliate_user
+(
+    id             bigint not null
+        primary key,
+    affiliate_user bigint null,
+    constraint FKdopihwu6uu6b9wo6nlt9qhuou
+        foreign key (id) references user (id),
+    constraint FKoqfjfsmwpokp4jhe335f4sbe1
+        foreign key (affiliate_user) references affiliate_user (id)
+);
+
+create table user_address
+(
+    id             bigint       not null
+        primary key,
+    address_line_1 varchar(255) null,
+    address_line_3 varchar(255) null,
+    address_line_2 varchar(255) null,
+    auth_user_id   varchar(255) null,
+    city_id        varchar(255) null,
+    created_at     datetime(6)  null,
+    coordination   tinyblob     null,
+    status         int          null,
+    updated_at     datetime(6)  null,
+    zip_code       varchar(255) null,
+    user_id        bigint       null,
+    constraint FKk2ox3w9jm7yd6v1m5f68xibry
+        foreign key (user_id) references user (id)
+);
+
+create table user_telephone_number
+(
+    id           bigint       not null
+        primary key,
+    auth_user_id int          null,
+    country_code varchar(255) null,
+    created_at   datetime(6)  null,
+    number       varchar(255) null,
+    status       int          null,
+    updated_at   datetime(6)  null,
+    user_id      bigint       null,
+    constraint FKr4hakfr5dfjplxhfeccxdh9c0
+        foreign key (user_id) references user (id)
+);
+
+create table vendor
+(
+    id     bigint not null
+        primary key,
+    vendor bigint null,
+    constraint FKgb18723yc4x91hccrpd9ywpep
+        foreign key (id) references user (id),
+    constraint FKr4n50rnumb3m48hp481yvjsay
+        foreign key (vendor) references vendor (id)
+);
+
