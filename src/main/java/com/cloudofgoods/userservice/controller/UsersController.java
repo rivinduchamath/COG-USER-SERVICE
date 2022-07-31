@@ -52,19 +52,17 @@ public class UsersController {
     @ResponseStatus(HttpStatus.OK)
 //    @PreAuthorize("hasAuthority('read_profile')")
     public UserDTO fetch(@PathVariable(name = "userName") String username, HttpServletRequest request) {
-
         String code = request.getHeader("Authorization");
         String contentType = request.getHeader("Content-Type");
         return customerService.getUser(username, code, contentType);
     }
 
     @RequestMapping(value = "/profiles", method = RequestMethod.GET)
-//    @PreAuthorize("hasRole('ROLE_admin')")
+    //@PreAuthorize("hasRole('ROLE_admin')")
     public List<UserDTO> userDetails(HttpServletRequest request)  {
-        System.out.println("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
-        String code = request.getHeader("Authorization");
-        String contentType = request.getHeader("Content-Type");
-        return customerService.fetchAllProfiles(code, contentType);
+        String accessToken = request.getHeader("Authorization");
+        System.out.println(accessToken +"Q QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+        return customerService.fetchAllProfiles(accessToken);
     }
 
     @RequestMapping(value = "/accountLockUser", method = RequestMethod.GET)

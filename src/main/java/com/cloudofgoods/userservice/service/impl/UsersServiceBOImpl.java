@@ -29,7 +29,7 @@ public class UsersServiceBOImpl implements UsersServiceBO {
     @Override
     public UserRegisterDTO save(UserDTO userDTO) {
 
-        String getUserURL = "http://localhost:9191//registration/users";
+        String getUserURL = "http://localhost:9191/api/v5/oauth/registration/users";
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(getUserURL);
         UriComponents uriComponents = builder.build().encode();
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO(
@@ -46,7 +46,7 @@ public class UsersServiceBOImpl implements UsersServiceBO {
 
     @Override
     public UserDTO getUser(String userName, String code, String contentType) {
-        String getCustomerUri = "http://localhost:9191/getuser";
+        String getCustomerUri = "http://localhost:9191/api/v5/oauth/getuser";
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(getCustomerUri); // The allRequestParams must have been built for all the query params
         UriComponents uriComponents = builder.build().encode();
@@ -64,15 +64,14 @@ public class UsersServiceBOImpl implements UsersServiceBO {
     }
 
     @Override
-    public List<UserDTO> fetchAllProfiles(String code, String contentType) {
+    public List<UserDTO> fetchAllProfiles(String accessToken) {
 
-        String getCustomerUri = "http://localhost:9191//getallusers";
+        String getCustomerUri = "http://localhost:9191/api/v5/oauth/getallusers";
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(getCustomerUri);
         UriComponents uriComponents = builder.build().encode();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", code);
-        headers.set("Content-Type", contentType);
+        headers.set("Authorization", accessToken);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<?> entity = new HttpEntity<>(headers);
         ParameterizedTypeReference<List<UserDTO>> typeRef = new ParameterizedTypeReference<List<UserDTO>>() {
@@ -82,7 +81,7 @@ public class UsersServiceBOImpl implements UsersServiceBO {
 
     @Override
     public UserDTO accountLockUser(String userName, String code, String type) {
-        String getCustomerUri = "http://localhost:9191/accountLock";
+        String getCustomerUri = "http://localhost:9191/api/v5/oauth/accountLock";
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(getCustomerUri);
         UriComponents uriComponents = builder.build().encode();
 

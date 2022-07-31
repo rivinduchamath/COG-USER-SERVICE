@@ -11,7 +11,7 @@ public interface UsersServiceBO {
 
     UserDTO getUser(String profileId, String code, String contentType);
 
-    List<UserDTO>  fetchAllProfiles(String code, String contentType) ;
+    List<UserDTO>  fetchAllProfiles(String code) ;
 
     UserDTO accountLockUser(String userName, String code, String type);
 
